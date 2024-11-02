@@ -11,28 +11,28 @@
 <body>
     <div id="research">
         <h1>Statistical Independence in Probability Theory</h1>
-        <p>The concept of <strong>statistical independence</strong> in probability refers to a relationship between two events where the occurrence of one event does not impact the likelihood of the other occurring. If two events are independent, the probability that they happen simultaneously is simply the product of their individual probabilities. Formally, two events <em>A</em> and <em>B</em> are independent if:</p>
+        <p>The concept of <strong>statistical independence</strong> in probability refers to a relationship between two events where the occurrence of one event does not impact the likelihood of the other occurring. If two events are independent, the probability that they happen simultaneously is simply the product of their individual probabilities. Formally, two events \( A \) and \( B \) are independent if:</p>
         
-        <p><code>P(A ∩ B) = P(A) × P(B)</code></p>
+        <p>\[ P(A \cap B) = P(A) \times P(B) \]</p>
 
         <h2>Analogies and Formal Definitions</h2>
         <ul>
-            <li><strong>Independent Events:</strong> This equation implies that knowing whether <em>A</em> occurs provides no additional information about the likelihood of <em>B</em>, and vice versa. In other words, the conditional probability of <em>A</em> given <em>B</em> is the same as the unconditional probability of <em>A</em>:</li>
+            <li><strong>Independent Events:</strong> This equation implies that knowing whether \( A \) occurs provides no additional information about the likelihood of \( B \), and vice versa. In other words, the conditional probability of \( A \) given \( B \) is the same as the unconditional probability of \( A \):</li>
         </ul>
         
-        <p><code>P(A | B) = P(A)</code></p>
+        <p>\[ P(A | B) = P(A) \]</p>
 
         <h3>Practical Example</h3>
-        <p>Consider the roll of two dice. Let <em>A</em> represent the event "rolling a 4 on the first die" and <em>B</em> represent "rolling a 5 on the second die." Since the outcome of the first die has no effect on the second, the events <em>A</em> and <em>B</em> are independent. The probability of rolling a 4 on the first die is <code>1/6</code>, and the probability of rolling a 5 on the second die is also <code>1/6</code>. Thus, the probability that both events occur together is:</p>
+        <p>Consider the roll of two dice. Let \( A \) represent the event "rolling a 4 on the first die" and \( B \) represent "rolling a 5 on the second die." Since the outcome of the first die has no effect on the second, the events \( A \) and \( B \) are independent. The probability of rolling a 4 on the first die is \( \frac{1}{6} \), and the probability of rolling a 5 on the second die is also \( \frac{1}{6} \). Thus, the probability that both events occur together is:</p>
         
-        <p><code>P(A ∩ B) = 1/6 × 1/6 = 1/36</code></p>
+        <p>\[ P(A \cap B) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36} \]</p>
 
         <h2>Independence Between Random Variables</h2>
-        <p>For <strong>random variables</strong> <em>X</em> and <em>Y</em>, independence means that their joint probability is the product of their marginal probabilities:</p>
+        <p>For <strong>random variables</strong> \( X \) and \( Y \), independence means that their joint probability is the product of their marginal probabilities:</p>
         
-        <p><code>P(X = x and Y = y) = P(X = x) × P(Y = y)</code></p>
+        <p>\[ P(X = x \text{ and } Y = y) = P(X = x) \times P(Y = y) \]</p>
 
-        <p>If the variables are independent, knowing the value of <em>X</em> does not give any insight into the value of <em>Y</em>, and vice versa.</p>
+        <p>If the variables are independent, knowing the value of \( X \) does not give any insight into the value of \( Y \), and vice versa.</p>
 
         <h2>Difference Between Independence and Correlation</h2>
         <p>A key point is that <strong>independence</strong> and <strong>correlation</strong> are not the same. Independence implies a total lack of association, while correlation only measures the linear relationship. Two variables might be uncorrelated but still dependent.</p>
