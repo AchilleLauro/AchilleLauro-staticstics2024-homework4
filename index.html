@@ -10,76 +10,35 @@
 </head>
 <body>
     <div id="research">
-        <!-- Translation of the Median Demonstration -->
-        <h2>Demonstration of the Median as the Minimum Sum of Absolute Deviations</h2>
-        <p>
-            Let \( X = \{x_1, x_2, ..., x_n\} \) be an ordered set of values. We are looking for a value \( c \) that minimizes the sum of absolute deviations from all values in the set:
-        </p>
-        <p>
-            \[
-            S(c) = \sum_{i=1}^{n} |x_i - c|
-            \]
-        </p>
-        <p>
-            The problem is to find the point \( c \) that minimizes this sum. The median is defined as the value that partitions the dataset such that half of the values are less than or equal to the median and half are greater than or equal to the median. This turns out to be the value that minimizes the sum of absolute deviations. Here’s why:
-        </p>
-        <ul>
-            <li>
-                <strong>Continuity and Linearity:</strong> The function \( |x_i - c| \), which measures the absolute deviation, is piecewise linear. For each individual \( x_i \), the function behaves linearly until \( c \) passes through \( x_i \), where there is a "kink" or discontinuity in the derivative. This behavior is crucial because it means that, as we vary \( c \), the changes in the total sum of deviations are linear until \( c \) crosses one of the \( x_i \) values.
-            </li>
-            <li>
-                <strong>Minimization:</strong> The derivative of \( |x_i - c| \) changes sign at \( c = x_i \). For \( c < x_i \), the derivative is negative, and for \( c > x_i \), the derivative is positive. Therefore, at the median (where the number of points to the left and right of \( c \) are balanced), the sum of the deviations is minimized. For values of \( c \) less than the median, the sum decreases as \( c \) increases, and for values greater than the median, the sum increases.
-            </li>
-            <li>
-                <strong>Balance Point:</strong> The median is effectively the point that balances the total "weight" of the dataset, where the total distance to all points is minimized. This balance is unique to the median in terms of minimizing the sum of absolute deviations.
-            </li>
-        </ul>
-        <p>
-            In simpler terms, the sum of absolute deviations is minimized by the median because moving away from the median increases the total deviation on one side of the dataset more than it decreases it on the other side. This makes the median the optimal point for minimizing absolute deviations.
-        </p>
+        <h1>Statistical Independence in Probability Theory</h1>
+        <p>The concept of <strong>statistical independence</strong> in probability refers to a relationship between two events where the occurrence of one event does not impact the likelihood of the other occurring. If two events are independent, the probability that they happen simultaneously is simply the product of their individual probabilities. Formally, two events <em>A</em> and <em>B</em> are independent if:</p>
+        
+        <p><code>P(A ∩ B) = P(A) × P(B)</code></p>
 
-        <h3>Other Ways to Define Central Tendency (Location Statistics)</h3>
-        <p>
-            There are several other ways to define central tendency (or "location statistics") in a dataset. Each of these methods offers a different perspective on what it means to be "central" to a set of data. These include the mean, mode, geometric mean, and harmonic mean, among others. Here’s a detailed explanation of each:
-        </p>
+        <h2>Analogies and Formal Definitions</h2>
         <ul>
-            <li>
-                <strong>Arithmetic Mean</strong>: The arithmetic mean (commonly known as the average) is the sum of all values divided by the number of values. It minimizes the sum of squared deviations (as opposed to absolute deviations, minimized by the median). The mean is widely used but is sensitive to extreme values (outliers). The arithmetic mean is expressed as:
-                \[
-                \text{Mean} = \frac{1}{n} \sum_{i=1}^{n} x_i
-                \]
-                This is the most common measure of central tendency because it is easy to compute and has desirable mathematical properties, such as linearity.
-            </li>
-            <li>
-                <strong>Mode</strong>: The mode is the value that occurs most frequently in a dataset. While it is not commonly used in continuous data (because exact repetitions are rare), it is useful in categorical data or data with clear peaks in frequency. The mode is particularly useful in situations where we are interested in the most "popular" value rather than the average or median.
-            </li>
-            <li>
-                <strong>Geometric Mean</strong>: The geometric mean is used for data that involve products or percentages, such as growth rates. It is calculated by multiplying all the values together and then taking the \( n \)-th root (where \( n \) is the number of values). The geometric mean is appropriate for data that are exponentially distributed or multiplicative in nature, such as interest rates or population growth:
-                \[
-                \text{Geometric Mean} = \left( \prod_{i=1}^{n} x_i \right)^{1/n}
-                \]
-                This measure is less affected by outliers than the arithmetic mean and is often used in finance and economics.
-            </li>
-            <li>
-                <strong>Harmonic Mean</strong>: The harmonic mean is useful when dealing with rates or ratios, such as speed or efficiency. It gives more weight to smaller values and is calculated as the reciprocal of the arithmetic mean of the reciprocals of the values. This is particularly useful when the data involve quantities like rates of change or averages of ratios:
-                \[
-                \text{Harmonic Mean} = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}
-                \]
-                The harmonic mean is the most appropriate measure when averaging quantities like speed (distance/time) or in cases where values are inversely related to the quantities of interest.
-            </li>
-            <li>
-                <strong>Trimmed Mean</strong>: The trimmed mean is a variation of the arithmetic mean where a percentage of the smallest and largest values are removed before calculating the mean. This method is used to reduce the effect of outliers and provides a more robust estimate of central tendency.
-            </li>
+            <li><strong>Independent Events:</strong> This equation implies that knowing whether <em>A</em> occurs provides no additional information about the likelihood of <em>B</em>, and vice versa. In other words, the conditional probability of <em>A</em> given <em>B</em> is the same as the unconditional probability of <em>A</em>:</li>
         </ul>
+        
+        <p><code>P(A | B) = P(A)</code></p>
 
-        <h3>Generalizing Location Statistics</h3>
-        <p>
-            Beyond these common measures, the concept of central tendency can be generalized in many ways. For example, one could define a "p-norm" mean that minimizes deviations raised to the power of \( p \):
-            \[
-            L_p(c) = \left( \sum_{i=1}^{n} |x_i - c|^p \right)^{1/p}
-            \]
-            For \( p = 2 \), this is the arithmetic mean; for \( p = 1 \), this is the median (minimizing absolute deviations); and for \( p \to \infty \), this leads to the minimax principle, which minimizes the maximum deviation. These generalizations show that central tendency can be adapted to different contexts and needs.
-        </p>
+        <h3>Practical Example</h3>
+        <p>Consider the roll of two dice. Let <em>A</em> represent the event "rolling a 4 on the first die" and <em>B</em> represent "rolling a 5 on the second die." Since the outcome of the first die has no effect on the second, the events <em>A</em> and <em>B</em> are independent. The probability of rolling a 4 on the first die is <code>1/6</code>, and the probability of rolling a 5 on the second die is also <code>1/6</code>. Thus, the probability that both events occur together is:</p>
+        
+        <p><code>P(A ∩ B) = 1/6 × 1/6 = 1/36</code></p>
+
+        <h2>Independence Between Random Variables</h2>
+        <p>For <strong>random variables</strong> <em>X</em> and <em>Y</em>, independence means that their joint probability is the product of their marginal probabilities:</p>
+        
+        <p><code>P(X = x and Y = y) = P(X = x) × P(Y = y)</code></p>
+
+        <p>If the variables are independent, knowing the value of <em>X</em> does not give any insight into the value of <em>Y</em>, and vice versa.</p>
+
+        <h2>Difference Between Independence and Correlation</h2>
+        <p>A key point is that <strong>independence</strong> and <strong>correlation</strong> are not the same. Independence implies a total lack of association, while correlation only measures the linear relationship. Two variables might be uncorrelated but still dependent.</p>
+
+        <h2>Importance in Statistics and Probability</h2>
+        <p>Independence is crucial in statistical modeling, such as in regression models, where errors are often assumed to be independent. Violating this assumption can lead to inaccuracies in inference and interpretation.</p>
     </div>
 
     <h1>Penetration Simulation</h1>
