@@ -19,11 +19,11 @@ function createPenetrationData(numAttackers, timeSteps, p) {
     const mean = finalPenetrations.reduce((sum, x) => sum + x, 0) / numAttackers;
     const variance = finalPenetrations.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numAttackers;
 
-    return { attackResults, mean, variance };
+    return { attackResults, finalPenetrations, mean, variance }; // Restituisce anche finalPenetrations
 }
 
 function drawPenetrationGraph(numAttackers, timeSteps, p) {
-    const { attackResults, mean, variance } = createPenetrationData(numAttackers, timeSteps, p);
+    const { attackResults, finalPenetrations, mean, variance } = createPenetrationData(numAttackers, timeSteps, p);
     const labels = Array.from({ length: timeSteps }, (_, i) => `${i + 1}`);
     const attackerDatasets = attackResults.map((attackerData, idx) => ({
         label: `Attacker ${idx + 1}`,
@@ -65,7 +65,7 @@ function drawPenetrationGraph(numAttackers, timeSteps, p) {
         });
     }
 
-    drawAttackerDistribution(finalPenetrations, mean, variance);
+    drawAttackerDistribution(finalPenetrations, mean, variance); // Passa correttamente finalPenetrations
 }
 
 function drawAttackerDistribution(finalPenetrations, mean, variance) {
