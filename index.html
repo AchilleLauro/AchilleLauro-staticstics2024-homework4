@@ -42,36 +42,24 @@
     </div>
 
     <h1>Penetration Simulation</h1>
-    <form id="configForm">
-        <div>
-            <label for="hackerCount">Attackers (m):</label>
-            <input type="number" id="hackerCount" value="50" min="1" required>
-        </div>
-        <div>
-            <label for="attackRate">Attack Rate (λ):</label>
-            <input type="number" id="attackRate" value="50" step="0.01" min="0" required>
-        </div>
-        <div>
-            <label for="timeSteps">Time Steps (n):</label>
-            <input type="number" id="timeSteps" value="70" min="1" required>
-        </div>
-    </form>
+   <form id="configForm">
+    <div>
+        <label for="hackerCount">Attackers (m):</label>
+        <input type="number" id="hackerCount" value="50" min="1" required>
+    </div>
+    <div>
+        <label for="timeSteps">Time Steps (n):</label>
+        <input type="number" id="timeSteps" value="70" min="1" required>
+    </div>
+    <div>
+        <label for="jumpProbability">Jump Probability (p):</label>
+        <input type="number" id="jumpProbability" value="0.5" step="0.01" min="0" max="1" required>
+    </div>
+</form>
 
-    <div class="button-container">
-        <button id="runSimulationBtn">Run Simulation</button>
-    </div>
-
-    <div class="chart-container">
-        <canvas id="serverPenetrationChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas id="attackerDistributionChart"></canvas>
-    </div>
-
-    <div id="statistics">
-        <p id="mean">Mean: N/A</p>
-        <p id="variance">Variance: N/A</p>
-    </div>
+<div class="button-container">
+    <button id="runSimulationBtn">Run Simulation</button>
+</div>
 
     <script src="script.js"></script>
 </body>
