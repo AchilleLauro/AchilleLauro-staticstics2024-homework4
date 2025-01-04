@@ -1,122 +1,53 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #ccc;
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penetration Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div id="research">
+        <h1>Statistical Independence in Probability Theory</h1>
+        <p>The concept of <strong>statistical independence</strong> in probability refers to a relationship between two events where the occurrence of one event does not impact the likelihood of the other occurring. If two events are independent, the probability that they happen simultaneously is simply the product of their individual probabilities. Formally, two events \( A \) and \( B \) are independent if:</p>
+        <p>\[ P(A \cap B) = P(A) \times P(B) \]</p>
+    </div>
 
-h1, h2, h3, h4 {
-    color: #4CAF50;
-}
+    <h1>Penetration Simulation</h1>
+    <form id="configForm">
+        <div>
+            <label for="hackerCount">Attackers (m):</label>
+            <input type="number" id="hackerCount" value="50" min="1" required>
+        </div>
+        <div>
+            <label for="timeSteps">Time Steps (n):</label>
+            <input type="number" id="timeSteps" value="70" min="1" required>
+        </div>
+        <div>
+            <label for="jumpProbability">Jump Probability (p):</label>
+            <input type="number" id="jumpProbability" value="0.5" step="0.01" min="0" max="1" required>
+        </div>
+    </form>
 
-h2 {
-    font-size: 1.6rem;
-}
+    <div class="button-container">
+        <button id="runSimulationBtn">Run Simulation</button>
+    </div>
 
-h3 {
-    font-size: 1.5rem;
-    margin-top: 20px;
-}
+    <div class="chart-container">
+        <canvas id="serverPenetrationChart" width="400" height="200"></canvas>
+    </div>
 
-h4 {
-    font-size: 1.3rem;
-    margin-top: 15px;
-}
+    <div class="chart-container">
+        <canvas id="attackerDistributionChart" width="400" height="200"></canvas>
+    </div>
 
-.chart-container {
-    width: 100%;
-    margin-bottom: 30px;
-}
+    <div id="statistics">
+        <p id="mean">Mean: N/A</p>
+        <p id="variance">Variance: N/A</p>
+    </div>
 
-p, ul {
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-form {
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    color: #4CAF50;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    width: 48%;
-}
-
-label {
-    font-weight: bold;
-    color: #4CAF50;
-    margin-bottom: 5px;
-}
-
-input[type="number"] {
-    padding: 8px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    width: 100%;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 3px;
-    margin: 5px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-#statistics {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #4CAF50;
-}
-
-#mean, #variance {
-    margin: 10px 0;
-}
-
-#research {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#mean, #variance {
-    margin: 10px 0;
-}
-
-/* Aggiunta di uno stile specifico per il form di configurazione */
-@media (max-width: 600px) {
-    form div {
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-    }
-}
+    <script src="script.js"></script>
+</body>
+</html>
