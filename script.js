@@ -2,40 +2,28 @@ const serverPenCtx = document.getElementById('serverPenetrationChart').getContex
 const attackerDistCtx = document.getElementById('attackerDistributionChart').getContext('2d');
 let serverPenetrationGraph, attackerDistGraph;
 
-function createPenetrationData(numAttackers, lambda, timeSteps) {
-    const dt = 1 / timeSteps;  // Intervallo temporale infinitesimale
-    const attackResults = Array.from({ length: numAttackers }, () => [0]);
-    const finalPenetrations = Array(numAttackers).fill(0);
-    const savedScores = [];
+function createPenetrationData(numAttackers, timeSteps, p) {
+    const dt = 1 / timeSteps; // Intervallo temporale infinitesimale
+    const attackResults = Array.from({ length: numAttackers }, () => [0]); // Traiettorie inizializzate
 
     for (let attacker = 0; attacker < numAttackers; attacker++) {
-        let penetrations = 0;
         for (let step = 1; step <= timeSteps; step++) {
-            // Probabilità di attacco in questo intervallo dt
-            const attackSuccess = Math.random() < lambda * dt;
-            penetrations += attackSuccess ? 1 : 0;
-            attackResults[attacker].push(penetrations);
-
-            if (step === timeSteps) {
-                savedScores.push(penetrations);
-            }
+            // Salto di ±sqrt(dt) basato sulla probabilità p
+            const jump = (Math.random() < p ? 1 : -1) * Math.sqrt(dt);
+            const lastValue = attackResults[attacker][step - 1];
+            attackResults[attacker].push(lastValue + jump);
         }
-        finalPenetrations[attacker] = penetrations;
     }
 
-    const penetrationDistribution = finalPenetrations.reduce((acc, numPenetrations) => {
-        acc[numPenetrations] = (acc[numPenetrations] || 0) + 1;
-        return acc;
-    }, {});
-
+    const finalPenetrations = attackResults.map(results => results[results.length - 1]);
     const mean = finalPenetrations.reduce((sum, x) => sum + x, 0) / numAttackers;
-    let variance = finalPenetrations.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numAttackers;
+    const variance = finalPenetrations.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numAttackers;
 
-    return { attackResults, penetrationDistribution, mean, variance, savedScores };
+    return { attackResults, mean, variance };
 }
 
-function drawPenetrationGraph(numAttackers, lambda, timeSteps) {
-    const { attackResults, penetrationDistribution, mean, variance, savedScores } = createPenetrationData(numAttackers, lambda, timeSteps);
+function drawPenetrationGraph(numAttackers, timeSteps, p) {
+    const { attackResults, mean, variance } = createPenetrationData(numAttackers, timeSteps, p);
     const labels = Array.from({ length: timeSteps }, (_, i) => `${i + 1}`);
     const attackerDatasets = attackResults.map((attackerData, idx) => ({
         label: `Attacker ${idx + 1}`,
@@ -46,8 +34,8 @@ function drawPenetrationGraph(numAttackers, lambda, timeSteps) {
         borderWidth: 2
     }));
 
-    const yMin = 0;
-    const yMax = timeSteps;
+    const yMin = -Math.ceil(Math.sqrt(timeSteps)); // Limite minimo simmetrico
+    const yMax = Math.ceil(Math.sqrt(timeSteps)); // Limite massimo simmetrico
 
     if (serverPenetrationGraph) {
         serverPenetrationGraph.data.labels = ['Start', ...labels];
@@ -77,19 +65,18 @@ function drawPenetrationGraph(numAttackers, lambda, timeSteps) {
         });
     }
 
-    drawAttackerDistribution(penetrationDistribution, timeSteps, mean, variance, savedScores);
+    drawAttackerDistribution(finalPenetrations, mean, variance);
 }
 
-function drawAttackerDistribution(penetrationDistribution, timeSteps, mean, variance, savedScores) {
-    let minXValue = Math.min(...savedScores);
-    let maxXValue = Math.max(...savedScores);
-
-    const stepSize = 1;
-    const labels = Array.from({ length: Math.ceil((maxXValue - minXValue) / stepSize) + 1 }, (_, i) => (minXValue + i * stepSize).toFixed(1));
+function drawAttackerDistribution(finalPenetrations, mean, variance) {
+    const minXValue = Math.min(...finalPenetrations);
+    const maxXValue = Math.max(...finalPenetrations);
+    const stepSize = 0.1;
+    const labels = Array.from({ length: Math.ceil((maxXValue - minXValue) / stepSize) + 1 }, (_, i) => (minXValue + i * stepSize).toFixed(2));
 
     const distData = labels.map(label => {
         const floatLabel = parseFloat(label);
-        return savedScores.filter(score => Math.abs(score - floatLabel) < stepSize / 2).length;
+        return finalPenetrations.filter(score => Math.abs(score - floatLabel) < stepSize / 2).length;
     });
 
     const maxYValue = Math.max(...distData);
@@ -136,11 +123,10 @@ function drawAttackerDistribution(penetrationDistribution, timeSteps, mean, vari
     document.getElementById('variance').textContent = `Variance: ${variance.toFixed(4)}`;
 }
 
+// Listener aggiornato per includere il parametro p
 document.getElementById('runSimulationBtn').addEventListener('click', function() {
     const numAttackers = parseInt(document.getElementById('hackerCount').value);
-    const lambda = parseFloat(document.getElementById('attackRate').value);
     const timeSteps = parseInt(document.getElementById('timeSteps').value);
-    drawPenetrationGraph(numAttackers, lambda, timeSteps);
+    const p = parseFloat(document.getElementById('jumpProbability').value); // Nuovo parametro p
+    drawPenetrationGraph(numAttackers, timeSteps, p);
 });
-
-drawPenetrationGraph(50, 50, 70);
